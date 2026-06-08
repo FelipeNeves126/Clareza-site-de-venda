@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clareza - Inteligência Financeira para Todos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --primary-light: #D1FAE5;
+            --secondary: #1E293B;
+            --accent: #F59E0B;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --bg: #0F172A;
+            --bg-light: #1E293B;
+            --bg-card: #1E293B;
+            --text: #F8FAFC;
+            --text-muted: #94A3B8;
+            --text-dim: #64748B;
+            --border: #334155;
+            --gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --gradient-hero: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #064E3B 100%);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 40px rgba(16, 185, 129, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 2rem;
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-cta {
+            background: var(--gradient);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-light);
+            border-color: var(--primary);
+        }
+
+        /* Phone Mockup */
+        .phone-mockup {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .phone-frame {
+            width: 280px;
+            height: 560px;
+            background: var(--secondary);
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 28px;
+            background: var(--secondary);
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+
+        .phone-content {
+            padding: 40px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .phone-greeting {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .phone-name {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .phone-balance-card {
+            background: var(--gradient);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .phone-balance-label {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .phone-balance-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .phone-chart {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 6px;
+            padding: 10px 0;
+        }
+
+        .chart-bar {
+            width: 24px;
+            background: rgba(16, 185, 129, 0.3);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            transition: height 1s ease;
+        }
+
+        .chart-bar.active {
+            background: var(--primary);
+        }
+
+        .chart-bar::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .phone-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 20px;
+            margin-top: auto;
+        }
+
+        .phone-nav-item {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: var(--text-dim);
+            opacity: 0.5;
+        }
+
+        .phone-nav-item.active {
+            background: var(--primary);
+            opacity: 1;
+        }
+
+        .glow-behind {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* ===== SECTIONS COMMON ===== */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== PAIN SECTION ===== */
+        .pain {
+            background: var(--bg);
+            position: relative;
+        }
+
+        .pain::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .pain-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .pain-content h2 span {
+            color: var(--danger);
+        }
+
+        .pain-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .pain-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .pain-stat {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .pain-stat:hover {
+            border-color: var(--danger);
+            transform: translateY(-5px);
+        }
+
+        .pain-stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+        }
+
+        .pain-stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .pain-visual {
+            position: relative;
+        }
+
+        .pain-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pain-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s;
+            animation: slideIn 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .pain-card:nth-child(1) { animation-delay: 0.1s; }
+        .pain-card:nth-child(2) { animation-delay: 0.2s; }
+        .pain-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .pain-card:hover {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .pain-card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .pain-card-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== SOLUTION ===== */
+        .solution {
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg-light) 100%);
+            text-align: center;
+        }
+
+        .solution-highlight {
+            background: var(--gradient);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-highlight::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+
+        .solution-highlight h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .solution-highlight p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .solution-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            background: var(--bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== AI SECTION ===== */
+        .ai-section {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310B981' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-visual {
+            position: relative;
+        }
+
+        .ai-brain {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .ai-brain-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            animation: rotate 20s linear infinite;
+        }
+
+        .ai-brain-circle:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .ai-brain-circle:nth-child(2) {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            animation-direction: reverse;
+            animation-duration: 15s;
+        }
+
+        .ai-brain-circle:nth-child(3) {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            animation-duration: 10s;
+        }
+
+        .ai-brain-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .ai-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: orbit 4s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes orbit {
+            0%, 100% { transform: translate(0, 0); opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .ai-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ai-content > p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .ai-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ai-feature {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .ai-feature:hover {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .ai-feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .ai-feature-text h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .ai-feature-text p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .ai-alert-demo {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--warning);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ===== SECURITY ===== */
+        .security {
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .security-item {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .security-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .security-item-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .security-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .security-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-badge {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ===== PRICING ===== */
+        .pricing {
+            background: var(--bg);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--bg-light) 100%);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .pricing-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .cross {
+            color: var(--text-dim);
+        }
+
+        .pricing-cta {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-cta.primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .pricing-cta.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .pricing-cta.secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .pricing-cta.secondary:hover {
+            background: var(--bg);
+            border-color: var(--primary);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg);
+            padding: 6rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .footer-manifesto {
+            font-size: 1.8rem;
+            font-weight: 800;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.4;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-closing {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .footer-closing strong {
+            color: var(--primary);
+        }
+
+        .footer-cta {
+            margin-bottom: 4rem;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        .footer-copy {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-cta-group {
+                justify-content: center;
+            }
+
+            .pain-grid,
+            .ai-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pain-visual {
+                order: -1;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .pain-stats {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">✦</div>
+                Clareza
+            </a>
+            <ul class="nav-links">
+                <li><a href="#pain">A Dor</a></li>
+                <li><a href="#solution">Solução</a></li>
+                <li><a href="#features">Funcionalidades</a></li>
+                <li><a href="#ai">IA</a></li>
+                <li><a href="#security">Segurança</a></li>
+                <li><a href="#pricing">Preços</a></li>
+            </ul>
+            <a href="#pricing" class="nav-cta">Criar Conta</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Assessor Financeiro Pessoal
+                </div>
+                <h1>Inteligência financeira para todos os brasileiros.</h1>
+                <p>Mais do que um aplicativo de finanças. Um assessor financeiro pessoal no seu bolso para você sair do escuro e assumir o controle do seu dinheiro.</p>
+                <div class="hero-cta-group">
+                    <a href="#pricing" class="btn-primary">
+                        Criar Conta Gratuita
+                        <span>→</span>
+                    </a>
+                    <a href="#solution" class="btn-secondary">
+                        Conhecer a Clareza
+                    </a>
+                </div>
+            </div>
+            <div class="phone-mockup">
+                <div class="glow-behind"></div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="phone-notch"></div>
+                        <div class="phone-content">
+                            <div class="phone-header">
+                                <div>
+                                    <div class="phone-greeting">Bom dia,</div>
+                                    <div class="phone-name">Maria 👋</div>
+                                </div>
+                                <div style="font-size: 1.2rem;">🔔</div>
+                            </div>
+                            <div class="phone-balance-card">
+                                <div class="phone-balance-label">Saldo Disponível</div>
+                                <div class="phone-balance-value">R$ 4.280,00</div>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px;">Evolução Mensal</div>
+                            <div class="phone-chart">
+                                <div class="chart-bar" style="height: 30%;" data-label="Jan"></div>
+                                <div class="chart-bar" style="height: 45%;" data-label="Fev"></div>
+                                <div class="chart-bar" style="height: 35%;" data-label="Mar"></div>
+                                <div class="chart-bar" style="height: 60%;" data-label="Abr"></div>
+                                <div class="chart-bar active" style="height: 85%;" data-label="Mai"></div>
+                            </div>
+                        </div>
+                        <div class="phone-nav">
+                            <div class="phone-nav-item active"></div>
+                            <div class="phone-nav-item"></div>
+                            <div class="phone-nav-item"></div>
+                            <div class="phone-nav-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAIN -->
+    <section class="pain" id="pain">
+        <div class="container">
+            <div class="pain-grid">
+                <div class="pain-content reveal">
+                    <div class="section-tag">A Realidade</div>
+                    <h2>Você trabalha apenas para pagar o que já deve?</h2>
+                    <p>Você não está sozinho. Hoje, mais de <strong>81 milhões de brasileiros</strong> estão com o nome negativado. Não por irresponsabilidade, mas porque nunca fomos ensinados a organizar nossa vida financeira.</p>
+                    <div class="pain-stats">
+                        <div class="pain-stat">
+                            <div class="pain-stat-number">70,5%</div>
+                            <div class="pain-stat-label">da renda já comprometida antes do mês começar</div>
+                        </div>
+                        <div class="pain-stat">
+                            <div class="pain-stat-number">81M+</div>
+                            <div class="pain-stat-label">de brasileiros com nome negativado</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pain-visual reveal">
+                    <div class="pain-cards">
+                        <div class="pain-card">
+                            <div class="pain-card-icon">📊</div>
+                            <div class="pain-card-text">
+                                <strong style="color: var(--text); display: block; margin-bottom: 0.3rem;">Planilhas não conversam</strong>
+                                Anotações e planilhas não conversam entre si e geram descontrole total das finanças.
+                            </div>
+                        </div>
+                        <div class="pain-card">
+                            <div class="pain-card-icon">😰</div>
+                            <div class="pain-card-text">
+                                <strong style="color: var(--text); display: block; margin-bottom: 0.3rem;">Falta de educação financeira</strong>
+                                Nunca fomos ensinados a organizar nossa vida financeira de forma estruturada.
+                            </div>
+                        </div>
+                        <div class="pain-card">
+                            <div class="pain-card-icon">💸</div>
+                            <div class="pain-card-text">
+                                <strong style="color: var(--text); display: block; margin-bottom: 0.3rem;">O resultado inevitável</strong>
+                                O descontrole inevitavelmente vira dívida, criando um ciclo difícil de quebrar.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">A Solução</div>
+                <h2 class="section-title">Conheça a Clareza: O Hub Central do seu Dinheiro</h2>
+                <p class="section-subtitle">Esqueça as planilhas complexas que exigem conhecimento técnico. A Clareza foi desenhada para quem está começando no vermelho e precisa de um caminho simples e estruturado até o positivo.</p>
+            </div>
+            <div class="solution-highlight reveal">
+                <h3>🚀 Em menos de 20 segundos</h3>
+                <p>Após receber seu salário, você saberá exatamente para onde seu dinheiro deve ir. Sem complicação, sem planilhas, sem stress.</p>
+                <div class="solution-time">
+                    <span>⏱️</span>
+                    Economize horas por mês com automação inteligente
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Funcionalidades</div>
+                <h2 class="section-title">Tudo que você precisa em um só lugar</h2>
+                <p class="section-subtitle">Ferramentas poderosas, interface simples. Controle total das suas finanças sem complicação.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📊</div>
+                    <h3>Painel Geral Instantâneo</h3>
+                    <p>Veja sua receita, gastos, saldo real disponível e evolução mensal em uma interface amigável e sem jargões.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🚦</div>
+                    <h3>Teto de Gastos Inteligente</h3>
+                    <p>Barras de progresso intuitivas que mudam de cor (verde, amarelo e vermelho) para avisar se você está se aproximando do seu limite.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Reserva de Emergência</h3>
+                    <p>Calcule seu colchão de segurança ideal e acompanhe seus aportes mensais até bater 100% da meta.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Metas Financeiras</h3>
+                    <p>Quer viajar, comprar um carro ou investir em educação? Crie objetivos com prazos e acompanhe o tempo restante.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI SECTION -->
+    <section class="ai-section" id="ai">
+        <div class="container">
+            <div class="ai-grid">
+                <div class="ai-visual reveal">
+                    <div class="ai-brain">
+                        <div class="ai-brain-circle"></div>
+                        <div class="ai-brain-circle"></div>
+                        <div class="ai-brain-circle"></div>
+                        <div class="ai-brain-core">🧠</div>
+                        <div class="ai-particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+                        <div class="ai-particle" style="top: 20%; right: 15%; animation-delay: 1s;"></div>
+                        <div class="ai-particle" style="bottom: 20%; left: 20%; animation-delay: 2s;"></div>
+                        <div class="ai-particle" style="bottom: 10%; right: 10%; animation-delay: 0.5s;"></div>
+                    </div>
+                </div>
+                <div class="ai-content reveal">
+                    <div class="section-tag">O Grande Diferencial</div>
+                    <h2>IA Financeira Ativa</h2>
+                    <p>Nossa IA não espera você errar para agir. Enquanto outros aplicativos são apenas "diários do passado", a Clareza projeta o seu futuro.</p>
+                    <div class="ai-features">
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">🔮</div>
+                            <div class="ai-feature-text">
+                                <h4>Alertas Preditivos</h4>
+                                <p>A IA analisa seus padrões de gasto e alerta antes que você ultrapasse seus limites.</p>
+                                <div class="ai-alert-demo">
+                                    <span>⚠️</span>
+                                    "Atenção: Seu limite de Lazer está em 80% e ainda faltam 18 dias para o fim do mês."
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">🔍</div>
+                            <div class="ai-feature-text">
+                                <h4>Detecção de Desperdícios</h4>
+                                <p>Identifica assinaturas duplicadas, gastos recorrentes desnecessários e oportunidades de economia.</p>
+                                <div class="ai-alert-demo">
+                                    <span>💡</span>
+                                    "Notamos 3 serviços de streaming diferentes. Cancelar um deles economizará R$ 480 ao ano."
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ai-feature">
+                            <div class="ai-feature-icon">⚡</div>
+                            <div class="ai-feature-text">
+                                <h4>Regra 50/30/20 Automática</h4>
+                                <p>A plataforma distribui automaticamente sua renda em Necessidades (50%), Desejos (30%) e Poupança (20%).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURITY -->
+    <section class="security" id="security">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Segurança</div>
+                <h2 class="section-title">Segurança em Primeiro Lugar</h2>
+                <p class="section-subtitle">O seu dinheiro e os seus dados merecem o mais alto nível de proteção.</p>
+            </div>
+            <div class="security-grid">
+                <div class="security-item reveal">
+                    <div class="security-item-icon">🔒</div>
+                    <h4>Criptografia de Nível Bancário</h4>
+                    <p>Seus dados são criptografados em trânsito e em repouso com os mais altos padrões de segurança.</p>
+                </div>
+                <div class="security-item reveal">
+                    <div class="security-item-icon">🛡️</div>
+                    <h4>Infraestrutura Escalável</h4>
+                    <p>Arquitetura robusta que cresce com você, garantindo performance mesmo em picos de uso.</p>
+                </div>
+                <div class="security-item reveal">
+                    <div class="security-item-icon">👁️</div>
+                    <h4>Privacidade Garantida</h4>
+                    <p>Seus dados são seus. Nunca vendemos ou compartilhamos suas informações com terceiros.</p>
+                </div>
+            </div>
+            <div class="tech-stack reveal">
+                <div class="tech-badge">
+                    <span>⚙️</span>
+                    Backend C#
+                </div>
+                <div class="tech-badge">
+                    <span>🍃</span>
+                    MongoDB
+                </div>
+                <div class="tech-badge">
+                    <span>🔐</span>
+                    SSL/TLS
+                </div>
+                <div class="tech-badge">
+                    <span>☁️</span>
+                    Cloud Native
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag">Planos</div>
+                <h2 class="section-title">Escolha o seu caminho</h2>
+                <p class="section-subtitle">Comece gratuitamente e evolua quando estiver pronto. Sem surpresas, sem letras miúdas.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <div class="pricing-name">Clareza Gratuita</div>
+                    <div class="pricing-price">R$ 0</div>
+                    <div class="pricing-desc">Perfeito para começar a organizar suas finanças</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Registro de Gastos e Entradas</li>
+                        <li><span class="check">✓</span> Teto por Categoria e Metas Básicas</li>
+                        <li><span class="cross">✕</span> IA Financeira Completa e Alertas</li>
+                        <li><span class="cross">✕</span> Conexão Open Finance</li>
+                        <li><span class="cross">✕</span> Relatórios Avançados</li>
+                    </ul>
+                    <button class="pricing-cta secondary">Começar Gratuitamente</button>
+                </div>
+                <div class="pricing-card featured reveal">
+                    <div class="pricing-name">Clareza Premium</div>
+                    <div class="pricing-price">R$ 14,90<span>/mês</span></div>
+                    <div class="pricing-desc">O poder completo da inteligência financeira</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Registro de Gastos e Entradas</li>
+                        <li><span class="check">✓</span> Teto por Categoria e Metas Básicas</li>
+                        <li><span class="check">✓</span> IA Financeira Completa e Alertas</li>
+                        <li><span class="check">✓</span> Conexão Open Finance</li>
+                        <li><span class="check">✓</span> Relatórios Avançados</li>
+                    </ul>
+                    <button class="pricing-cta primary">Começar Premium Agora</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-manifesto">
+                "Nosso sucesso não será medido em downloads. Será medido no dia em que uma criança brasileira não herdar a dívida dos pais."
+            </p>
+            <p class="footer-closing">
+                O Brasil não precisa de mais um banco digital. Precisa de <strong>clareza</strong>. E é exatamente isso que nós entregamos.
+            </p>
+            <div class="footer-cta">
+                <a href="#pricing" class="btn-primary">Começar Gratuitamente Agora</a>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">✦ Clareza</div>
+                <div class="footer-links">
+                    <a href="#pain">A Dor</a>
+                    <a href="#solution">Solução</a>
+                    <a href="#features">Funcionalidades</a>
+                    <a href="#ai">IA</a>
+                    <a href="#security">Segurança</a>
+                    <a href="#pricing">Preços</a>
+                </div>
+                <div class="footer-copy">© 2026 Clareza. Todos os direitos reservados.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.background = 'var(--bg)';
+            navLinks.style.padding = '1rem 2rem';
+            navLinks.style.borderBottom = '1px solid var(--border)';
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate chart bars on load
+        window.addEventListener('load', () => {
+            const bars = document.querySelectorAll('.chart-bar');
+            bars.forEach((bar, index) => {
+                setTimeout(() => {
+                    bar.style.height = bar.style.height;
+                }, index * 200);
+            });
+        });
+
+        // Button click feedback
+        document.querySelectorAll('.pricing-cta, .btn-primary, .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) return;
+                
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.background = 'rgba(255,255,255,0.3)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                
+                const rect = this.getBoundingClientRect();
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+                
+                // Show coming soon for buttons without links
+                if (!this.getAttribute('href')) {
+                    const originalText = this.textContent;
+                    this.textContent = 'Em breve! 🚀';
+                    this.style.opacity = '0.8';
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.opacity = '1';
+                    }, 2000);
+                }
+            });
+        });
+
+        // Add ripple keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    width: 200px;
+                    height: 200px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.backgroundPositionY = (scrolled * 0.5) + 'px';
+            }
+        });
+    </script>
+</body>
+</html>
